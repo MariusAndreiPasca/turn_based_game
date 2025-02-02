@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="battle.css" />
+    <title>TBRPG</title>
+  </head>
+  <body>
+    <section class="game-screen">
+      <div class="background">
+        <div class="skills-table">
+          <div class="skill-description-box">
+            <h3 class="skill-name">Fireball</h3>
+            <p class="skill-description">
+              Launch a blazing fireball at the enemy, dealing 150 damage on
+              impact. The target is set ablaze, suffering a Burn status that
+              inflicts 100 damage per turn for the next rounds.
+            </p>
+          </div>
+          <div class="skill-box">
+            <img src="./assets/skills/fireball.png" alt="" />
+          </div>
+          <div class="skill-box">
+            <img src="./assets/skills/thunder.png" alt="" />
+          </div>
+          <div class="skill-box">
+            <img src="./assets/skills/refresh.png" alt="" />
+          </div>
+          <div class="skill-box">
+            <img src="./assets/skills/iceage.png" alt="" />
+          </div>
+        </div>
+        <!--player minion-->
+        <div class="left-side">
+          <div class="player-minion character">
+            <div class="minion-health-bar">
+              <div class="health-bar-status hp-bar"></div>
+            </div>
+            <div class="minion-model-player"></div>
+          </div>
+        </div>
+        <!--enemy minion-->
+        <div class="right-side">
+          <div class="enemy-minion">
+            <div class="minion-health-bar hp-bar">
+              <div class="health-bar-status"></div>
+            </div>
+            <div class="minion-model-enemy character"></div>
+          </div>
+        </div>
+      </div>
+      <div id="pointer"></div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>

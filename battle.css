@@ -1,0 +1,145 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+
+.background {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1024px;
+  height: 576px;
+  padding: 10%;
+  overflow: hidden;
+  background: url('./assets/Horizontal/14.png') no-repeat center center/cover;  
+  }
+
+  .skill-description-box {
+    width: 500px;
+    height: 100px;
+    background-color: grey;
+    border-radius: 10px;
+    border: 2px solid grey;
+    padding: 10px;
+    color: white;
+  }
+
+  .skill-name {
+    margin-bottom: 5px;
+  }
+
+  .skills-table {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    width: 100%;
+    height: 200px;
+    z-index: 10;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+  }
+
+  .skill-box {
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+    border-radius: 10px;
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.9));
+    border: 2px solid grey;
+  }
+
+  .skill-box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  .skill-box:hover {
+    filter: brightness(1.5);
+    cursor: pointer;
+}
+
+  .minion-health-bar {
+    width: 200px;
+    height: 30px;
+    background-color: red;
+    margin-bottom: 20px;
+    border: 2px solid white;
+    border-radius: 10px;
+  }
+
+  .health-bar-status {
+    width: 100%;
+    height: 26px;
+    background-color: green;
+    border-radius: 8px;
+  }
+
+  .minion-model-player {
+    width: 200px;
+    height: 200px;
+    background-image: url('./assets/V1.2/89.png');
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center;
+    scale: 1.6;
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.9));
+}
+
+.minion-model-enemy {
+  width: 200px;
+  height: 200px;
+  background-image: url('./assets/V1.2/96.png');
+  background-size: contain; 
+  background-repeat: no-repeat;
+  background-position: center;
+  scale: 1.6;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.9));
+}
+
+#pointer {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: url('./assets/skills/pointer.png') no-repeat center;
+  background-size: contain;
+  animation: bounce 0.8s infinite;
+  z-index: 10;
+  display: block; 
+}
+
+.character {
+  position: relative;
+  
+  text-align: center;
+}
+
+.hp-bar {
+  width: 100%;
+  height: 10px;
+  background-color: green;
+  margin-top: 5px;
+  border: 1px solid #000;
+}
+
+@keyframes bounce {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-10px);
+  }
+}
