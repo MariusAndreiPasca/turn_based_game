@@ -11,33 +11,31 @@
       <div class="background">
         <div class="skills-table">
           <div class="skill-description-box">
-            <h3 class="skill-name">Fireball</h3>
-            <p class="skill-description">
-              Launch a blazing fireball at the enemy, dealing 150 damage on
-              impact. The target is set ablaze, suffering a Burn status that
-              inflicts 100 damage per turn for the next rounds.
-            </p>
+            <h3 class="skill-name"></h3>
+            <p class="skill-description"></p>
           </div>
-          <div class="skill-box">
+          <div class="skill-box active" data-skill="skill1">
             <img src="./assets/skills/fireball.png" alt="" />
           </div>
-          <div class="skill-box">
+          <div class="skill-box active" data-skill="skill2">
             <img src="./assets/skills/thunder.png" alt="" />
           </div>
-          <div class="skill-box">
+          <div class="skill-box inactive" data-skill="skill3">
             <img src="./assets/skills/refresh.png" alt="" />
           </div>
-          <div class="skill-box">
+          <div class="skill-box active" data-skill="skill4">
             <img src="./assets/skills/iceage.png" alt="" />
           </div>
         </div>
+
         <!--player minion-->
         <div class="left-side">
           <div class="player-minion character">
             <div class="minion-health-bar">
               <div class="health-bar-status hp-bar"></div>
             </div>
-            <div class="minion-model-player"></div>
+            <div class="minion-model-player character"></div>
+            <span></span>
           </div>
         </div>
         <!--enemy minion-->
@@ -47,10 +45,10 @@
               <div class="health-bar-status"></div>
             </div>
             <div class="minion-model-enemy character"></div>
+            <span></span>
           </div>
         </div>
       </div>
-      <div id="pointer"></div>
     </section>
     <script src="script.js"></script>
   </body>

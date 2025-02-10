@@ -22,7 +22,7 @@ body {
   height: 576px;
   padding: 10%;
   overflow: hidden;
-  background: url('./assets/Horizontal/14.png') no-repeat center center/cover;  
+  background: url('./assets/Horizontal/1.png') no-repeat center center/cover;  
   }
 
   .skill-description-box {
@@ -33,6 +33,7 @@ body {
     border: 2px solid grey;
     padding: 10px;
     color: white;
+    opacity: 0;
   }
 
   .skill-name {
@@ -59,6 +60,7 @@ body {
     border-radius: 10px;
     filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.9));
     border: 2px solid grey;
+    cursor: pointer;
   }
 
   .skill-box img {
@@ -67,9 +69,8 @@ body {
     border-radius: 10px;
   }
 
-  .skill-box:hover {
+  .active:hover {
     filter: brightness(1.5);
-    cursor: pointer;
 }
 
   .minion-health-bar {
@@ -86,60 +87,70 @@ body {
     height: 26px;
     background-color: green;
     border-radius: 8px;
+    transition: width 0.3s ease;
   }
 
   .minion-model-player {
     width: 200px;
     height: 200px;
-    background-image: url('./assets/V1.2/89.png');
+    background-image: url('./assets/V1.1/52.png');
     background-size: contain; 
     background-repeat: no-repeat;
     background-position: center;
-    scale: 1.6;
     filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.9));
+    scale: 1.6;
+    transform: scaleX(-1);
+    
 }
 
 .minion-model-enemy {
-  width: 200px;
-  height: 200px;
-  background-image: url('./assets/V1.2/96.png');
+  width: 250px;
+  height: 250px;
+  background-image: url('./assets/V1.0/19.png');
   background-size: contain; 
   background-repeat: no-repeat;
   background-position: center;
-  scale: 1.6;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.9));
-}
-
-#pointer {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background: url('./assets/skills/pointer.png') no-repeat center;
-  background-size: contain;
-  animation: bounce 0.8s infinite;
-  z-index: 10;
-  display: block; 
+  scale: 1.6;
 }
 
 .character {
   position: relative;
-  
-  text-align: center;
+
 }
 
-.hp-bar {
-  width: 100%;
-  height: 10px;
-  background-color: green;
-  margin-top: 5px;
-  border: 1px solid #000;
+.character span {
+  position: absolute;
+  scale: 0.5;
+  border-top: 60px solid #fff;
+  border-right: 30px solid transparent;
+  border-left: 30px solid transparent;
+  margin: auto;
+  left: 70px;
+  animation: bounce 1.5s infinite;
 }
 
 @keyframes bounce {
-  0%, 100% {
-      transform: translateY(0);
+  0% {
+    top: -60px;
   }
+
   50% {
-      transform: translateY(-10px);
+    top: -80px;
+  }
+
+  100% {
+    top: -60px;
   }
 }
+
+.damage-effect {
+  animation: hitEffect 0.3s infinite;
+}
+
+@keyframes hitEffect {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
