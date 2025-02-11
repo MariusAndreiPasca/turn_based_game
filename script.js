@@ -189,7 +189,7 @@ function updateTurnIndicator() {
   target.hp -= damage;
   if (target.hp < 0) target.hp = 0;
 
-  // Actualizează interfața
+  
   if (target === player) {
     healthUpdate(player, ".player-minion .health-bar-status");
     animateDamage(".player-minion .minion-model-player");
@@ -198,7 +198,7 @@ function updateTurnIndicator() {
     animateDamage(".enemy-minion .minion-model-enemy");
   }
 
-  // Așteaptă finalizarea animațiilor înainte de a verifica starea
+  
   setTimeout(() => {
     if (isDefeated()) {
       endBattle();
