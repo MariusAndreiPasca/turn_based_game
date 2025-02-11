@@ -126,9 +126,13 @@ body {
   border-right: 30px solid transparent;
   border-left: 30px solid transparent;
   margin: auto;
-  left: 70px;
-  animation: bounce 1.5s infinite;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -60px;
+  opacity: 0; 
+  transition: opacity 0.3s ease-in-out;
 }
+
 
 @keyframes bounce {
   0% {
