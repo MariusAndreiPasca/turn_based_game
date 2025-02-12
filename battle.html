@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="battle.css" />
+    <title>TBRPG</title>
+  </head>
+  <body>
+    <section class="game-screen">
+      <div class="background">
+        <div class="skills-table">
+          <div class="skill-description-box">
+            <h3 class="skill-name"></h3>
+            <p class="skill-description"></p>
+          </div>
+          <div class="skill-box active" data-skill="skill1">
+            <img src="./assets/skills/fireball.png" alt="" />
+          </div>
+          <div class="skill-box active" data-skill="skill2">
+            <img src="./assets/skills/thunder.png" alt="" />
+          </div>
+          <div class="skill-box inactive" data-skill="skill3">
+            <img src="./assets/skills/refresh.png" alt="" />
+          </div>
+          <div class="skill-box active" data-skill="skill4">
+            <img src="./assets/skills/iceage.png" alt="" />
+          </div>
+        </div>
+
+        <!--player minion-->
+        <div class="player-minion character">
+          <div class="minion-health-bar hp-bar">
+            <div class="health-bar-status"></div>
+          </div>
+          <div class="minion-model-player character"></div>
+          <span></span>
+        </div>
+
+        <!--enemy minion-->
+        <div class="enemy-minion character">
+          <div class="minion-health-bar hp-bar">
+            <div class="health-bar-status"></div>
+          </div>
+          <div class="minion-model-enemy character"></div>
+          <span></span>
+        </div>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
