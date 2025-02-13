@@ -1,0 +1,56 @@
+.fire-ball {
+    position: absolute;
+    z-index: 200;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    top: 40%;
+    left: 30%;
+    border-radius: 50%;
+    box-shadow: 
+                  -2px -2px 0 red,  
+                   2px -2px 0 orange,
+                  -2px  2px 0 yellow,  
+                   2px  2px 0 orange, 
+                   0px  0px 15px red;
+    animation: fireball 1s ease-in;
+    opacity: 0;
+  }
+  
+  .thunder-bolt {
+    position: absolute;
+    z-index: 50;
+    width: 100px;
+    height: 72%;
+    background-color: antiquewhite;
+    left: 65%;
+    top: 0;
+    animation: thunderbolt 1s ease-in-out;
+    border-left: 20px solid blue;
+    border-right: 20px solid blue;
+    opacity: 0;
+  }
+  
+  @keyframes thunderbolt {
+    0% {
+      opacity: 0.6;
+    }
+  
+    100% {
+      opacity: 1;
+      left: 60%;
+      width: 200px;
+    }  
+  }
+  
+  @keyframes fireball {
+    0% {
+      opacity: 0.6;
+    }
+  
+    100% {
+      opacity: 1;
+      left: 70%;
+      transform: scale(2);
+    }
+  }

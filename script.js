@@ -1,11 +1,13 @@
 // Player
 let player = {
+    name: "Megan",
     hp: 1500,
     maxHp: 1500,
     spd: 200,
     atk: 100,
     critRate: 25,
     critDmg: 2,
+    model: "./assets/Characters/Heroes/Mage.png",
     skill1: { title: "Fireball", description: "Launch a blazing fireball at the enemy, dealing damage on impact. The target is set ablaze, suffering a Burn status that inflicts damage every turn for the next rounds.", multiplicator: 2, effect: 50, type: "active" },
     skill2: { title: "Thunder", description: "Call down a devastating bolt of lightning, striking the enemy with pure damage, bypassing all resistances and defenses. No armor, no barrier, and no magic can withstand its raw power.", multiplicator: 3, type: "active" },
     skill3: { title: "Relentless Spirit", description: "Unleash your inner fighting spirit, granting a chance to take an extra turn immediately after using an ability.", type: "passive", effect: 18 },
@@ -13,76 +15,66 @@ let player = {
   };
 // Enemy
   let enemy = {
+    name: "Lucifer",
     hp: 2000,
     maxHp: 2000,
     spd: 150,
     atk: 100,
-    critRate: 30,
+    critRate: 25,
     critDmg: 2,
+    model: "./assets/Characters/Demon/Lucifer.png",
     skill1: { title: "Dark Slash", description: "A powerful dark slash that cuts through the enemy.", multiplicator: 2, type: "active" },
     skill2: { title: "Shadow Bolt", description: "Fires a bolt of shadow energy that deals heavy damage.", multiplicator: 3, type: "active" },
     skill4: { title: "Soul Drain", description: "Drains the soul of the enemy, recovering some health.", multiplicator: 2.5, type: "active" }
   };
   
   
+  //html elements selectors
   let skillBoxes = document.querySelectorAll(".skill-box");
   let skillDescriptionBox = document.querySelector(".skill-description-box");
   let skillName = document.querySelector(".skill-name");
   let skillDescription = document.querySelector(".skill-description");
   let skillTable = document.querySelector(".skills-table");
 
-  
+  // select character
+  function setCharacterModel(player, enemy) {
+    let playerModelDiv = document.getElementById("playerModel");
+    let enemyModelDiv = document.getElementById("enemyModel");
+    
+    playerModelDiv.style.backgroundImage = `url(${player.model})`;
+    enemyModelDiv.style.backgroundImage = `url(${enemy.model})`;
+}
   
   // Hover event
   skillBoxes.forEach((box) => {
+    // shows description box on hover
     box.addEventListener("mouseover", () => {
+      //value selector
       let skillKey = box.dataset.skill; 
       let skillData = player[skillKey]; 
-  
+      
+      // shows skill name and description
       if (skillData) {
         skillName.textContent = skillData.title; 
         skillDescription.textContent = skillData.description; 
         skillDescriptionBox.style.opacity = 1; 
       }
     });
-  
+    
+    // hides description box 
     box.addEventListener("mouseout", () => {
       skillName.textContent = ""; 
       skillDescription.textContent = ""; 
       skillDescriptionBox.style.opacity = 0; 
     });
   });
+
+
 // Loader
   document.addEventListener("DOMContentLoaded", () => {
+    setCharacterModel(player, enemy);
     battle();
   });
-//Choose Character Loader
-  document.addEventListener("DOMContentLoaded", function () {
-    let heroIcons = document.querySelectorAll(".hero-icon");
-
-    heroIcons.forEach(icon => {
-        icon.addEventListener("click", function () {
-          
-            heroIcons.forEach(i => i.classList.remove("selected"));
-
-            
-            this.classList.add("selected");
-
-            
-            localStorage.setItem("selectedHero", this.querySelector("img").src);
-        });
-    });
-
-    
-    let savedHero = localStorage.getItem("selectedHero");
-    if (savedHero) {
-        heroIcons.forEach(icon => {
-            if (icon.querySelector("img").src === savedHero) {
-                icon.classList.add("selected");
-            }
-        });
-    }
-});
 
   // Battle Function
   function battle() {
@@ -100,6 +92,7 @@ let player = {
 
   // Turn Order
   function turnOrder() {
+    // gives the turn to the highest spd fighter
     let atkFirst = (player.spd > enemy.spd) ? player : enemy;
     return atkFirst;
   }
@@ -108,14 +101,13 @@ let player = {
   function playerTurn() {
     showSkills();
     chooseSkill();
-
 }
 
     // Enemy Turn
     function enemyTurn() {
 
         hideSkills();
-
+        // Decide which ability the enemy uses
         let enemySkills = [enemy.skill1, enemy.skill2, enemy.skill4];
         let randomSkill = enemySkills[Math.floor(Math.random() * enemySkills.length)];
         
@@ -132,8 +124,10 @@ let player = {
     // Choose Skill
     function chooseSkill() {
       if(skillBoxes) {
+
+        // Decided Skill 
         skillBoxes.forEach((box) => {
-        
+          // disabels the action taken on skill 3, always a passive skill
           if (box.dataset.skill === "skill3") {
             box.classList.add("inactive"); 
             box.removeEventListener("click", handleSkillClick); 
@@ -145,6 +139,8 @@ let player = {
     }
     
       function handleSkillClick(event) {
+
+        // shows the skill that was clicked
         let selectedBox = event.target.closest(".skill-box");
         let skillKey = selectedBox.dataset.skill;
         let selectedSkill = player[skillKey];
@@ -171,32 +167,39 @@ let player = {
   function useSkill(user, target, skill) {
     if (!skill.multiplicator) return;
 
+    // calculates damage
     let damage = user.atk * skill.multiplicator;
-    let isCritical = isCrit(user.critRate);
+    let isCritical = isCrit(user.critRate); 
 
+    // verifys if there is a critical hit
     if (isCritical) {
         damage *= user.critDmg;
     }
 
+    // substrects damage from target hp
     target.hp -= damage;
+
+    // sets the HP to 0 if the damage excides the ramaining hp
     if (target.hp < 0) target.hp = 0;
 
-
-    if (target === player) {
-        healthUpdate(player, ".player-minion .health-bar-status");
-        animateDamage(".player-minion .minion-model-player", user); 
-    } else {
-        healthUpdate(enemy, ".enemy-minion .health-bar-status");
-        animateDamage(".enemy-minion .minion-model-enemy", user); 
-    }
+    let targetSelector = (target === player) ? ".player-minion" : ".enemy-minion";
+    let modelSelector = (target === player) ? ".player-minion .minion-model-player" : ".enemy-minion .minion-model-enemy";
+    let healthBarSelector = (target === player) ? ".player-minion .health-bar-status" : ".enemy-minion .health-bar-status";
 
     
+    showDamage(targetSelector, damage, isCritical);
+
+    healthUpdate(target, healthBarSelector);
+
+    animateDamage(modelSelector, isCritical);
+
     setTimeout(() => {
         if (isDefeated()) {
             endBattle();
         }
     }, 1000);
 }
+
 
 
     // Check Relentless 
@@ -220,8 +223,6 @@ let player = {
         healthBar.style.width = `${hpPercentage}%`;
       }
     }
-    
-      
   
   // Crit verify
 function isCrit(critRate) {
@@ -229,30 +230,56 @@ function isCrit(critRate) {
 }
 
 // Hit Effect 
-function animateDamage(targetSelector, attacker) {
+function animateDamage(targetSelector, isCritical) {
   let target = document.querySelector(targetSelector);
 
-  if (target) {
-      target.classList.add("damage-effect");
+  if (!target) return;
 
-      setTimeout(() => {
-          target.classList.remove("damage-effect");
-      }, 1000);
+  target.classList.add("damage-effect");
 
-      if (isCrit(attacker.critRate)) {
-          target.classList.add("crit-effect");
-
-          setTimeout(() => {
-              target.classList.remove("crit-effect");
-          }, 300);
-      }
+  if (isCritical) {
+      target.classList.add("crit-effect");
   }
+
+  setTimeout(() => {
+      target.classList.remove("damage-effect");
+      target.classList.remove("crit-effect");
+  }, 1000);
 }
+
+
+    // show damage
+    function showDamage(targetSelector, damage, isCrit = false) {
+      let target = document.querySelector(targetSelector);
+  
+      if (!target) return;
+  
+      
+      let hpText = document.createElement("div");
+      hpText.classList.add("hp-number");
+      hpText.textContent = `${damage}`; 
+  
+      
+      let healthBar = target.querySelector(".health-bar-status");
+      if (healthBar) {
+          healthBar.appendChild(hpText);
+      } else {
+          target.appendChild(hpText);
+      }
+  
+      
+      if (isCrit) {
+        hpText.classList.add("crit-hit");
+      }
+  
+      
+      setTimeout(() => {
+          hpText.remove();
+      }, 1000);
+  }
   
 
-    
-
-    // Enemy Turn - Disable Skills
+  // Enemy Turn - Disable Skills
     function hideSkills() {
         skillTable.style.display = "none"; 
     }
